@@ -1,89 +1,75 @@
 import React, { Component } from 'react';
 import './Counter.css'
-import PropTypes from 'prop-types'
+import CounterButton from './CounterButton'
 
 
 class Counter extends Component {
-    //Define the initial state in a constructor
     constructor() {
-        super(); //Error 1  
-        
-    }
-
-    render() {
-        return (
-            <div>
-                <div style={{float: "right"}} >
-                    <CounterButton/>
-                </div>
-                <div style={{float: "left"}}>
-                    <CounterButton/>
-                </div>                
-                <div>
-                    <button className="reset" onClick={CounterButton}>Reset</button>
-                </div>
-            </div>
-        )
-    }
-}
-
-class CounterButton extends Component {
-
-    //Define the initial state in a constructor
-    constructor() {
-        super()
+        super();
         this.state = {
-            counter: 0
+            counterA: 0,
+            counterB: 0
         }
-       // this.reset = this.reset.bind(this);
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+        this.reset = this.reset.bind(this);
+
     }
 
-    //render = () => {
     render() {
         return (
             <div>
-                <div>
-                    <button onClick={() => this.calculate(this.props.simple, "add")} >+{this.props.simple}</button>
+                <div style={{ float: "left" }} >
+                    <span className="name">Nós</span>
+                    <CounterButton simple={1} truco={3} team="A" increment={this.increment} decrement={this.decrement} />
+                    <span className="count">{this.state.counterA}</span>
+                </div>
+                <div style={{ float: "right" }}>
+                    <span className="name">Elas</span>
+                    <CounterButton simple={1} truco={3} team="B" increment={this.increment} decrement={this.decrement} />
+                    <span className="count">{this.state.counterB}</span>
                 </div>
                 <div>
-                    <button onClick={() => this.calculate(this.props.truco, "add")} >+{this.props.truco}</button>
-                </div>
-                <div>
-                    <button onClick={() => this.calculate(this.props.simple, "subtract")} style={{backgroundColor: 'red' }} >-{this.props.simple}</button>
-                </div>
-                <div>
-                    <span className="count">{this.state.counter}</span>
+                    <button className="reset" onClick={this.reset}>Reset</button>
                 </div>
             </div>
         )
     }
 
-     //calculate = () => {
-        calculate(value, operator) {            
-            this.setState(
-                (previousState) => {
-                    if(operator == "add") {
-                        return { counter: previousState.counter + value }          
-                    } else {
-                        return { counter: previousState.counter - value }
-                    }                    
+    increment(value, team) {
+        this.setState(
+            (previousState) => {
+                if (team == "A") {
+                    return { counterA: previousState.counterA + value }
+                } else {
+                    return { counterB: previousState.counterB + value }
                 }
-            )
-        }
 
-        reset() {            
-            this.setState({counter: 0})
-        }
+            }
+        )
+    }
 
-}
+    decrement(value, team) {
+        this.setState(
+            (previousState) => {
+                if (team == "A") {
+                    return { counterA: previousState.counterA - value }
+                } else {
+                    return { counterB: previousState.counterB - value }
+                }
 
-CounterButton.defaultProps = {
-    simple: 1,
-    truco: 3
-}
+            }
+        )
+    }
 
-CounterButton.propTypes = {
-    by: PropTypes.number
+    reset() {
+        this.setState(
+            {
+                counterA: 0,
+                counterB: 0
+            }
+        )
+    }
 }
 
 export default Counter
