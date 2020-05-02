@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Counter.css'
 import CounterButton from './CounterButton'
+import ListResults from './ListResults'
+import ClearResults from './ClearResults'
 
 
 class Counter extends Component {
@@ -13,6 +15,7 @@ class Counter extends Component {
         this.increment = this.increment.bind(this);
         this.decrement = this.decrement.bind(this);
         this.reset = this.reset.bind(this);
+        this.clearDataStore = this.clearDataStore.bind(this);
 
     }
 
@@ -25,13 +28,16 @@ class Counter extends Component {
                     <span className="count">{this.state.counterA}</span>
                 </div>
                 <div style={{ float: "right" }}>
-                    <span className="name">Elas</span>
+                    <span className="name">Eles</span>
                     <CounterButton simple={1} truco={3} team="B" increment={this.increment} decrement={this.decrement} />
                     <span className="count">{this.state.counterB}</span>
                 </div>
                 <div>
-                    <button className="reset" onClick={this.reset}>Reiniciar</button>
+                    <button className="reset" onClick={this.reset}>Finalizar</button>
                 </div>
+                <ListResults />
+                <ClearResults clearDataStore={this.clearDataStore} />
+                {/* <button onClick={this.clearDataStore}>Reiniciar</button>           */}
             </div>
         )
     }
@@ -40,11 +46,10 @@ class Counter extends Component {
         this.setState(
             (previousState) => {
                 if (team == "A") {
-                    return {counterA: previousState.counterA + value }
+                    return { counterA: previousState.counterA + value }
                 } else {
-                    return {counterB: previousState.counterB + value }
+                    return { counterB: previousState.counterB + value }
                 }
-
             }
         )
     }
@@ -53,11 +58,10 @@ class Counter extends Component {
         this.setState(
             (previousState) => {
                 if (team == "A") {
-                    return {counterA: previousState.counterA - value }
+                    return { counterA: previousState.counterA - value }
                 } else {
-                    return {counterB: previousState.counterB - value }
+                    return { counterB: previousState.counterB - value }
                 }
-
             }
         )
     }
@@ -70,25 +74,27 @@ class Counter extends Component {
             }
         )
         saveResultsInLS(this.state.counterA, this.state.counterB);
-    }    
-}
-
-function saveResultsInLS(stateA, stateB) {   
-    let resultsA;
-    let resultsB;
-    if (localStorage.getItem('resultsA') === null || localStorage.getItem('resultsB') === null) {
-        resultsA = [];
-        resultsB = [];    
-    } else {
-        resultsA = JSON.parse(localStorage.getItem('resultsA'));
-        resultsB = JSON.parse(localStorage.getItem('resultsB'));
     }
 
-    resultsA.push(stateA);
-    resultsB.push(stateB);  
+    clearDataStore() {
+        localStorage.clear();
+        window.location.reload();
+    }
+}
 
-    localStorage.setItem('resultsA', JSON.stringify(resultsA))
-    localStorage.setItem('resultsB', JSON.stringify(resultsB))
+
+function saveResultsInLS(stateA, stateB) {
+    let results;
+    const nameA = 'results'
+    if (localStorage.getItem(nameA) === null) {
+        results = [];
+    } else {
+        results = JSON.parse(localStorage.getItem(nameA));
+    }
+    results.push(stateA);
+    results.push(stateB);
+
+    localStorage.setItem(nameA, JSON.stringify(results))
 }
 
 export default Counter
