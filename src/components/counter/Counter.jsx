@@ -33,7 +33,7 @@ class Counter extends Component {
                     <span className="count">{this.state.counterB}</span>
                 </div>
                 <div>
-                    <button className="reset" onClick={this.reset}>Finalizar</button>
+                    <button className="resetButton" onClick={this.reset}>Salvar / Reiniciar</button>
                 </div>
                 <ListResults />
                 <ClearResults clearDataStore={this.clearDataStore} />

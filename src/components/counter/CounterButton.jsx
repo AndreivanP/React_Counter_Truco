@@ -18,13 +18,13 @@ class CounterButton extends Component {
         return (
             <div>               
                 <div>
-                    <button onClick={() => this.props.increment(this.props.simple, this.props.team)} >+{this.props.simple}</button>
+                    <button className="countButton" onClick={() => this.props.increment(this.props.simple, this.props.team)} >+{this.props.simple}</button>
                 </div>
                 <div>
-                    <button onClick={() => this.props.increment(this.props.truco, this.props.team)} >+{this.props.truco}</button>
+                    <button className="countButton" onClick={() => this.props.increment(this.props.truco, this.props.team)} >+{this.props.truco}</button>
                 </div>
                 <div>
-                    <button onClick={() => this.props.decrement(this.props.simple, this.props.team)} style={{ backgroundColor: 'red' }} >-{this.props.simple}</button>
+                    <button className="countButton" onClick={() => this.props.decrement(this.props.simple, this.props.team)} style={{ backgroundColor: 'red' }} >-{this.props.simple}</button>
                 </div>
             </div>
         )

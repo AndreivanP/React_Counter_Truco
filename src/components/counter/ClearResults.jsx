@@ -6,7 +6,7 @@ class ListResults extends Component {
 
     render() {
         return(
-            <button onClick={() => this.props.clearDataStore()}>Reiniciar</button>          
+            <button className="finishButton" onClick={() => this.props.clearDataStore()}>Limpar Resultados</button>          
         )           
     }
 

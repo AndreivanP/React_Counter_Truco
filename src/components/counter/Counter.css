@@ -1,10 +1,27 @@
-button {
+.countButton {
     background-color: green;
     font-size: 46px;
     padding: 50px 80px;
     color: black;
     width: 200px;
     height: 80px;
+}
+
+.resetButton {
+    background-color: rgb(162, 157, 192);
+    width: 250px;    
+    font-size: 30px;    
+    color: black;
+    height: 50px;
+}
+
+
+.finishButton {
+    background-color: rgb(204, 230, 57);
+    width: 225px;    
+    font-size: 25px;    
+    color: rgb(0, 0, 0);
+    height: 30px;
 }
 
 .count {
@@ -26,13 +43,7 @@ button {
     color: white
 }
 
-.reset {
-    background-color: rgb(191, 188, 207);
-    width: 190px;    
-    font-size: 25px;    
-    color: black;
-    height: 30px;
-}
+
 
 body {
     padding: 105px 200px;
