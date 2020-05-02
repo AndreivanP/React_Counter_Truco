@@ -30,7 +30,7 @@ class Counter extends Component {
                     <span className="count">{this.state.counterB}</span>
                 </div>
                 <div>
-                    <button className="reset" onClick={this.reset}>Reset</button>
+                    <button className="reset" onClick={this.reset}>Reiniciar</button>
                 </div>
             </div>
         )
@@ -40,9 +40,9 @@ class Counter extends Component {
         this.setState(
             (previousState) => {
                 if (team == "A") {
-                    return { counterA: previousState.counterA + value }
+                    return {counterA: previousState.counterA + value }
                 } else {
-                    return { counterB: previousState.counterB + value }
+                    return {counterB: previousState.counterB + value }
                 }
 
             }
@@ -53,9 +53,9 @@ class Counter extends Component {
         this.setState(
             (previousState) => {
                 if (team == "A") {
-                    return { counterA: previousState.counterA - value }
+                    return {counterA: previousState.counterA - value }
                 } else {
-                    return { counterB: previousState.counterB - value }
+                    return {counterB: previousState.counterB - value }
                 }
 
             }
@@ -69,7 +69,26 @@ class Counter extends Component {
                 counterB: 0
             }
         )
+        saveResultsInLS(this.state.counterA, this.state.counterB);
+    }    
+}
+
+function saveResultsInLS(stateA, stateB) {   
+    let resultsA;
+    let resultsB;
+    if (localStorage.getItem('resultsA') === null || localStorage.getItem('resultsB') === null) {
+        resultsA = [];
+        resultsB = [];    
+    } else {
+        resultsA = JSON.parse(localStorage.getItem('resultsA'));
+        resultsB = JSON.parse(localStorage.getItem('resultsB'));
     }
+
+    resultsA.push(stateA);
+    resultsB.push(stateB);  
+
+    localStorage.setItem('resultsA', JSON.stringify(resultsA))
+    localStorage.setItem('resultsB', JSON.stringify(resultsB))
 }
 
 export default Counter
